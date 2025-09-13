@@ -1,0 +1,160 @@
+.knowledge-sidebar {
+  width: 300px;
+  height: 100vh;
+  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.sidebar-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.knowledge-sections {
+  margin-bottom: 25px;
+}
+
+.knowledge-section {
+  margin-bottom: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-weight: 500;
+}
+
+.section-header:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.section-content {
+  padding: 0 15px 15px 15px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.section-content ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.section-content li {
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.crop-quick-info {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.crop-quick-info h4 {
+  margin: 0 0 15px 0;
+  font-size: 1rem;
+  color: #ffd700;
+}
+
+.crop-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.crop-card {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 3px solid #4CAF50;
+}
+
+.crop-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #4CAF50;
+  margin-bottom: 4px;
+}
+
+.crop-desc {
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+  opacity: 0.9;
+}
+
+.crop-conditions {
+  font-size: 0.75rem;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.sidebar-footer {
+  text-align: center;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* Scrollbar styling */
+.knowledge-sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.knowledge-sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.knowledge-sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+.knowledge-sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .knowledge-sidebar {
+    width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .knowledge-sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .knowledge-sidebar.open {
+    transform: translateX(0);
+  }
+}
+

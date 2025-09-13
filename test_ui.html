@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Recommendation System - Test UI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2d3748;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #4a5568;
+            font-size: 1.1rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .input-group label {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 8px;
+        }
+        
+        .input-group input {
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #4299e1;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4299e1, #3182ce);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3182ce, #2c5282);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #e2e8f0;
+            color: #4a5568;
+        }
+        
+        .btn-secondary:hover {
+            background: #cbd5e0;
+        }
+        
+        .results {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            min-height: 200px;
+        }
+        
+        .loading {
+            text-align: center;
+            color: #4299e1;
+            font-size: 1.1rem;
+        }
+        
+        .error {
+            background: #fed7d7;
+            color: #c53030;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #feb2b2;
+        }
+        
+        .success {
+            background: #c6f6d5;
+            color: #2f855a;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #9ae6b4;
+        }
+        
+        .crop-result {
+            background: linear-gradient(135deg, #e6fffa, #b2f5ea);
+            border: 2px solid #38b2ac;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .crop-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c7a7b;
+            margin-bottom: 10px;
+        }
+        
+        .crop-description {
+            color: #2d3748;
+            margin-bottom: 15px;
+        }
+        
+        .alternatives {
+            margin-top: 20px;
+        }
+        
+        .alternatives h4 {
+            color: #2d3748;
+            margin-bottom: 10px;
+        }
+        
+        .alt-item {
+            background: #f7fafc;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌱 CropAI</h1>
+            <p>AI-Powered Crop Recommendation System</p>
+        </div>
+        
+        <form id="cropForm">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label for="N">Nitrogen (N) - kg/ha</label>
+                    <input type="number" id="N" name="N" min="0" max="200" step="1" placeholder="80" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="P">Phosphorus (P) - kg/ha</label>
+                    <input type="number" id="P" name="P" min="0" max="200" step="1" placeholder="40" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="K">Potassium (K) - kg/ha</label>
+                    <input type="number" id="K" name="K" min="0" max="200" step="1" placeholder="40" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="temperature">Temperature - °C</label>
+                    <input type="number" id="temperature" name="temperature" min="0" max="50" step="0.1" placeholder="25" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="humidity">Humidity - %</label>
+                    <input type="number" id="humidity" name="humidity" min="0" max="100" step="1" placeholder="80" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="ph">pH Level</label>
+                    <input type="number" id="ph" name="ph" min="0" max="14" step="0.1" placeholder="6.5" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="rainfall">Rainfall - mm</label>
+                    <input type="number" id="rainfall" name="rainfall" min="0" max="500" step="1" placeholder="200" required>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" class="btn btn-secondary" onclick="resetForm()">Reset</button>
+                <button type="submit" class="btn btn-primary">Get Recommendation</button>
+            </div>
+        </form>
+        
+        <div class="results" id="results">
+            <div style="text-align: center; color: #4a5568;">
+                <h3>Ready for Analysis</h3>
+                <p>Enter your soil and climate parameters above to get AI-powered crop recommendations.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:5000/api';
+        
+        document.getElementById('cropForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                data[key] = parseFloat(value);
+            }
+            
+            showLoading();
+            
+            try {
+                const response = await fetch(`${API_BASE}/predict`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                if (response.ok) {
+                    showResults(result);
+                } else {
+                    showError(result.error || 'Failed to get prediction');
+                }
+            } catch (error) {
+                showError('Network error: ' + error.message);
+            }
+        });
+        
+        function showLoading() {
+            document.getElementById('results').innerHTML = `
+                <div class="loading">
+                    <h3>🔄 Analyzing...</h3>
+                    <p>Our AI model is processing your parameters</p>
+                </div>
+            `;
+        }
+        
+        function showError(message) {
+            document.getElementById('results').innerHTML = `
+                <div class="error">
+                    <h3>❌ Error</h3>
+                    <p>${message}</p>
+                </div>
+            `;
+        }
+        
+        function showResults(data) {
+            const prediction = data.prediction;
+            const recommended = prediction.recommended_crop;
+            const alternatives = prediction.top_predictions.slice(1);
+            
+            const cropEmojis = {
+                rice: '🌾', maize: '🌽', chickpea: '🫘', kidneybeans: '🫘',
+                pigeonpeas: '🫘', mothbeans: '🫘', mungbean: '🫘', blackgram: '🫘',
+                lentil: '🫘', pomegranate: '🍎', banana: '🍌', mango: '🥭',
+                grapes: '🍇', watermelon: '🍉', muskmelon: '🍈', apple: '🍎',
+                orange: '🍊', papaya: '🥭', coconut: '🥥', cotton: '🌿',
+                jute: '🌿', coffee: '☕'
+            };
+            
+            const cropDescriptions = {
+                rice: 'Staple food crop requiring high water and nitrogen',
+                maize: 'Cereal crop with high yield potential',
+                chickpea: 'Protein-rich legume crop',
+                banana: 'Tropical fruit crop with high potassium',
+                mango: 'Tropical fruit tree with sweet fruits',
+                cotton: 'Fiber crop for textile industry'
+            };
+            
+            document.getElementById('results').innerHTML = `
+                <div class="success">
+                    <h3>✅ Analysis Complete</h3>
+                </div>
+                
+                <div class="crop-result">
+                    <div class="crop-name">
+                        ${cropEmojis[recommended] || '🌱'} ${recommended.charAt(0).toUpperCase() + recommended.slice(1)}
+                    </div>
+                    <div class="crop-description">
+                        ${cropDescriptions[recommended] || 'Agricultural crop suitable for your conditions'}
+                    </div>
+                    <div style="color: #2c7a7b; font-weight: 600;">
+                        🎯 Best Match: ${prediction.top_predictions[0].probability}% confidence
+                    </div>
+                </div>
+                
+                ${alternatives.length > 0 ? `
+                <div class="alternatives">
+                    <h4>Alternative Options:</h4>
+                    ${alternatives.map(alt => `
+                        <div class="alt-item">
+                            <span>${cropEmojis[alt.crop] || '🌱'} ${alt.crop.charAt(0).toUpperCase() + alt.crop.slice(1)}</span>
+                            <span>${alt.probability}% match</span>
+                        </div>
+                    `).join('')}
+                </div>
+                ` : ''}
+            `;
+        }
+        
+        function resetForm() {
+            document.getElementById('cropForm').reset();
+            document.getElementById('results').innerHTML = `
+                <div style="text-align: center; color: #4a5568;">
+                    <h3>Ready for Analysis</h3>
+                    <p>Enter your soil and climate parameters above to get AI-powered crop recommendations.</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
+
