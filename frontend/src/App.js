@@ -7,12 +7,14 @@ import Results from './components/Results';
 import Footer from './components/Footer';
 import KnowledgeSidebar from './components/KnowledgeSidebar';
 import Chatbot from './components/Chatbot';
-import LanguageSelector from './components/LanguageSelector';
+import CropManagementButton from './components/CropManagementButton';
+import CropDashboard from './pages/CropDashboard';
 
 function App() {
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [showCropDashboard, setShowCropDashboard] = useState(false);
 
   const handlePrediction = async (formData) => {
     setLoading(true);
@@ -47,11 +49,27 @@ function App() {
     setError(null);
   };
 
+  const handleOpenCropDashboard = () => {
+    setShowCropDashboard(true);
+  };
+
+  const handleBackToMain = () => {
+    setShowCropDashboard(false);
+  };
+
+  if (showCropDashboard) {
+    return (
+      <LanguageProvider>
+        <CropDashboard onBack={handleBackToMain} />
+      </LanguageProvider>
+    );
+  }
+
   return (
     <LanguageProvider>
       <div className="App">
         <KnowledgeSidebar />
-        <Header />
+        <Header onOpenCropDashboard={handleOpenCropDashboard} />
         <main className="main-content">
           <div className="container">
             <div className="content-wrapper">
@@ -70,13 +88,11 @@ function App() {
                 />
               </div>
             </div>
-            <div className="language-selector-container">
-              <LanguageSelector />
-            </div>
           </div>
         </main>
         <Footer />
         <Chatbot onRecommendation={handlePrediction} />
+        <CropManagementButton />
       </div>
     </LanguageProvider>
   );

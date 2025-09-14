@@ -9,7 +9,8 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
+  backdrop-filter: none;
 }
 
 .sidebar-header {
@@ -33,9 +34,10 @@
 
 .knowledge-section {
   margin-bottom: 15px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   overflow: hidden;
+  backdrop-filter: none;
 }
 
 .section-header {
@@ -54,7 +56,8 @@
 
 .section-content {
   padding: 0 15px 15px 15px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: none;
 }
 
 .section-content ul {
@@ -69,10 +72,11 @@
 }
 
 .crop-quick-info {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 20px;
+  backdrop-filter: none;
 }
 
 .crop-quick-info h4 {
@@ -88,10 +92,11 @@
 }
 
 .crop-card {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   padding: 10px;
   border-radius: 6px;
   border-left: 3px solid #4CAF50;
+  backdrop-filter: none;
 }
 
 .crop-name {
@@ -116,10 +121,11 @@
 .sidebar-footer {
   text-align: center;
   padding: 15px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   font-size: 0.85rem;
   opacity: 0.9;
+  backdrop-filter: none;
 }
 
 /* Scrollbar styling */

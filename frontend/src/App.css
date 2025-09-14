@@ -22,6 +22,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   align-items: start;
+  margin-right: 50px; /* Add space on the right for dropdowns */
 }
 
 .form-section {
@@ -41,13 +42,8 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   min-height: 400px;
-}
-
-.language-selector-container {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 1200px) {
@@ -61,15 +57,10 @@
     margin-left: 0; /* No sidebar on mobile */
   }
   
-  .language-selector-container {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-  }
-  
   .content-wrapper {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+    margin-right: 0; /* Remove extra margin on mobile */
   }
   
   .main-content {
